@@ -1,0 +1,122 @@
+{
+	"openapi": "3.0.4",
+	"info": {
+		"title": "F1 Tire Prediction",
+		"summary": "Predicts the time to change tires",
+		"description": "bla bla bla bla",
+		"termsOfService": "https://mylink.com/terms",
+		"contact": {
+			"name": "F1-Tire-Team",
+			"url": "https://myurl.com/",
+			"email": "support@tirepredictionteam.com"
+		},
+		"license": {
+			"name": "Apache 2.0",
+			"url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+		},
+		"version": "1.0.1"
+	},
+	"servers": [
+		{
+			"url": "https://development.gigantic-server.com/v1",
+			"description": "Development server"
+		},
+		{
+			"url": "https://staging.gigantic-server.com/v1",
+			"description": "Staging server"
+		},
+		{
+			"url": "https://api.gigantic-server.com/v1",
+			"description": "Production server"
+		},
+		{
+			"url": "https://{username}.gigantic-server.com:{port}/{basePath}",
+			"description": "The production API server",
+			"variables": {
+				"username": {
+					"default": "demo",
+					"description": "A user-specific subdomain. Use `demo` for a free sandbox environment."
+				},
+				"port": {
+					"enum": ["8443", "443"],
+					"default": "8443"
+				},
+				"basePath": {
+					"default": "v2"
+				}
+			}
+		}
+	],
+	"paths": {
+		"/predict": {
+			"post": {
+				"summary": "return predicted tire change time",
+				"description": "bla bla bla",
+				"requestBody": {
+					"description": "bla bla bla",
+					"required": "true",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/TirePredictRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Predicted time",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TirePredictResponse"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Missing parameters",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"TirePredictRequest": {
+				"summary": "bla bla bla",
+				"type": "object",
+				"properties": [
+					"grandprix_year": {
+						"type": "integer"
+					},
+					"isRainning": {
+						"type": "boolean"
+					}
+				]
+			},
+			"TirePredictResponse": {
+				"summary": "blablabla",
+				"type": "object",
+				"properties": [
+					"predicted_time": {
+						"type": "float"
+					},
+					"inputParameters": {
+						"schema": {
+							"$ref": "#/components/schemas/TirePredictRequest"
+						}
+					}
+				]
+			}
+		}
+	}
+}
+
